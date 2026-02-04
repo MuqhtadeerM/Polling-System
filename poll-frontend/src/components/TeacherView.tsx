@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { socketService } from "../services/socket.service";
 import { usePoll } from "../hooks/usePoll";
 import { calculatePercentage, formatTime } from "../utils/helpers";
 import { CreatePollModal } from "./CreatePollModal";
@@ -11,12 +10,6 @@ export const TeacherView: React.FC = () => {
   const { poll, timeRemaining, error } = usePoll();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"chat" | "participants">("chat");
-
-  const handleEndPoll = () => {
-    if (poll && poll.status === "ACTIVE") {
-      socketService.endPoll(poll._id);
-    }
-  };
 
   const totalVotes =
     poll?.options.reduce((sum, opt) => sum + opt.votes, 0) || 0;
@@ -31,6 +24,7 @@ export const TeacherView: React.FC = () => {
                 <h2 className="question-label">
                   Question {poll.status === "ACTIVE" ? "1" : ""}
                 </h2>
+
                 {poll.status === "ACTIVE" && timeRemaining > 0 && (
                   <div className="timer">
                     <span className="timer-icon">⏱</span>
@@ -40,6 +34,7 @@ export const TeacherView: React.FC = () => {
                   </div>
                 )}
               </div>
+
               <div className="question-box">
                 <p>{poll.question}</p>
               </div>
@@ -63,6 +58,7 @@ export const TeacherView: React.FC = () => {
                       </div>
                       <span className="percentage">{percentage}%</span>
                     </div>
+
                     <div className="progress-bar">
                       <div
                         className="progress-fill"
@@ -74,23 +70,12 @@ export const TeacherView: React.FC = () => {
               })}
             </div>
 
-            {poll.status === "COMPLETED" ? (
-              <div className="waiting-message">
-                <button
-                  className="create-poll-btn"
-                  onClick={() => setShowCreateModal(true)}
-                >
-                  + Ask a new question
-                </button>
-              </div>
-            ) : (
-              <button
-                className="create-poll-btn"
-                onClick={() => setShowCreateModal(true)}
-              >
-                + Ask a new question
-              </button>
-            )}
+            <button
+              className="create-poll-btn"
+              onClick={() => setShowCreateModal(true)}
+            >
+              + Ask a new question
+            </button>
 
             {error && <div className="error-message">{error}</div>}
           </div>

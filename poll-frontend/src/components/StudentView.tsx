@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Poll } from "../types";
 import { socketService } from "../services/socket.service";
 import {
   calculatePercentage,
@@ -10,14 +9,11 @@ import {
 import { usePoll } from "../hooks/usePoll";
 import "../styles/StudentView.css";
 
-interface StudentViewProps {
-  studentName: string;
-}
-
-export const StudentView: React.FC<StudentViewProps> = ({ studentName }) => {
+export const StudentView: React.FC = () => {
   const { poll, timeRemaining, error, setError } = usePoll();
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [hasVoted, setHasVoted] = useState(false);
+
   const [studentId] = useState(() => {
     let id = getStoredStudentId();
     if (!id) {
@@ -87,6 +83,7 @@ export const StudentView: React.FC<StudentViewProps> = ({ studentName }) => {
               <p>{poll.question}</p>
             </div>
           </div>
+
           {timeRemaining > 0 && (
             <div className="timer">
               <span className="timer-icon">⏱</span>
@@ -103,7 +100,9 @@ export const StudentView: React.FC<StudentViewProps> = ({ studentName }) => {
             return (
               <div
                 key={index}
-                className={`option-item ${isSelected ? "selected" : ""} ${hasVoted ? "voted" : ""}`}
+                className={`option-item ${
+                  isSelected ? "selected" : ""
+                } ${hasVoted ? "voted" : ""}`}
                 onClick={() => !hasVoted && handleVote(index)}
               >
                 <div className="option-content">
@@ -112,6 +111,7 @@ export const StudentView: React.FC<StudentViewProps> = ({ studentName }) => {
                   </div>
                   <span className="option-text">{option.text}</span>
                 </div>
+
                 {hasVoted && (
                   <div className="vote-bar-container">
                     <div
