@@ -119,10 +119,7 @@ function App() {
         <Route path="/teacher" element={<TeacherView />} />
 
         {/* Student dashboard */}
-        <Route
-          path="/student"
-          element={<StudentView studentName={studentName} />}
-        />
+        <Route path="/student" element={<StudentView />} />
       </Routes>
     </div>
   );
