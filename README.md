@@ -72,7 +72,7 @@ Designed for **Teacher–Student live interaction** with **state recovery**, **s
 - **Database**: MongoDB Atlas
 
 ---
+🧑‍💻 Author
 
-## 📁 Project Structure
-
-### Backend
+Muhammed Muqhtadeer
+GitHub: https://github.com/MuqhtadeerM
