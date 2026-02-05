@@ -7,8 +7,8 @@ Designed for **Teacher–Student live interaction** with **state recovery**, **s
 
 ## 🚀 Live Demo
 
-- **Frontend**: https://your-frontend-url.vercel.app  
-- **Backend**: https://your-backend-url.onrender.com  
+- **Frontend**: [https://your-frontend-url.vercel.app  ](https://polling-system-sable.vercel.app/)
+
 
 > Replace URLs after deployment.
 
